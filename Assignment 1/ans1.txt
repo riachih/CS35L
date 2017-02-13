@@ -1,0 +1,63 @@
+1. man -k
+In my case, I used man man command to find out
+ the option of man -k, 
+which allows me to find 
+all the man pages that contain a 
+specific word in either their name or their description.
+
+2. /usr/bin/cp and /usr/bin/wc
+I used the comman which cp and which wc to find out
+
+3. find /usr/bin -name "?" -executable
+ There are 3 of them:
+/usr/bin/[
+This is part of the shell builtin test.
+/usr/bin/X
+This is Xorg,
+ which is a full featured X server created for Unix like operating systems.
+/usr/bin/w
+This can display the users who is logging on and what they are doing.
+
+4. /etc/alternatives/emacs
+readlink command can print value of a symbolic link. 
+I used readlink /usr/bin/emacs to find out.
+
+5. o-x means removes the permission of execute for owner. g-s means
+ that it sets the permission for group users on execution, i.e. 
+it will allow the group user execute with permissions from the owner.
+
+6. find -mtime 21
+Using man find command, I found the option of
+ -mtime n which allows you to find the files that were modified n*24 hours ago.
+
+7. I did not find any
+
+8. 16
+I first navigate to the directory /bin and then run the command find . -type l 
+-ls
+
+9. libpopt.so.0.0.0
+I fist navigate to the corresponding directory and then use ls -lrt to find out
+ the oldest file.
+
+10. /usr/bin
+By running the command readlink -f locale, I got the answer.
+
+11. M-x sort-lines, sort-paragraphs, sort-pages, sort-fields, sort-columns, sor
+t-numeric-fields. I learned these from reading through the emacs reference.
+
+12. C-M-a: going to the beginning of defun
+C-M-b: moving backforward
+C-M-c: existing current recursive edit
+C-M-d:
+C-M-e: going to the end of defun
+C-M-f: moving forwards
+C-M-g: rehighlighting a range of line 
+C-M-h: Put region around the defun
+
+13. abort partially typed or executing command or current research
+
+14. Yank function pastes the last stretch of killed text.
+
+15. emacs dired can list some subdirectories. 
+And the coloring of different files are different.

@@ -1,0 +1,44 @@
+#!/bin/bash
+
+#Remove English words(??):
+sed '/<tr>/,/<\/td>/d' |
+
+#Remove carriage returns
+sed 's:\r:\n:g' |
+
+#Extract words from the html file:
+grep -e '<td>.*</td>' |
+
+
+# switch uppercase
+tr '[:upper:]' '[:lower:]' |
+
+# switch ` to '
+tr '`' "'"  |
+
+# remove the remaining tags (??)
+sed 's|<td>||g' |
+sed 's|<u>||g' |
+sed 's|</u>||g' |
+sed 's|</td>||g' |
+
+#replace all blank spaces with new lines                                       
+tr '[:blank:]' '\n' |                                                          
+
+#remove coma                                                                  
+tr ',' "'\n " |
+
+#remove repeated empty lines                                                  
+tr -s '\n' | 
+
+# Remove blank spaces
+tr -d '[:blank:]' |
+
+#reject any entries that contains non-hawaiian characters
+tr -cs "pk\'mnwlhaeiou" '[\n*]' |
+
+# sort the file
+sort -u |
+
+#remove the blank line
+sed '/^$/d'

@@ -1,0 +1,64 @@
+#!/bin/sh
+
+dir=$1
+cd "$dir"
+
+#Declare an array for storage of quilified files
+declare -a regfiles
+let count=0
+
+#Get all the files including the hidden ones in the directory
+OUTPUT=`ls -a | sort`
+HIDDENFILE=`ls -a $dir | grep '^\.' | sort`
+
+#for FILE in $OUTPUT
+ # do
+  #  if  [ ! -r "$FILE" ]
+ #   then
+#	echo "$FILE is not readable" #report a problem when the file is not readable
+   # elif [ -f "$FILE" ]
+    #    then
+   #         regfiles[$count]="$FILE" #now it has all readable regular files in the array                                                                                            
+  #          let count=count+1  #all files are already sorted at this time
+ #   fi
+#done
+
+for HFILE in $HIDDENFILE
+do
+    if [ ! -r "$HFILE" ]
+    then echo "$HFILE is not readable" #report a problem when the file is not readable                                                                                             
+    elif [ -f "$HFILE" ]
+    then
+	regfiles[$count]="$HFILE"
+	let count=count+1
+    fi
+done
+
+
+for FILE in $OUTPUT
+do
+    if [ ! -r "$FILE" ]
+    then echo "$FILE is not readable" #report a problem when the file is not readable                                                                                               
+    elif [ -f "$FILE" ]
+    then
+        regfiles[$count]="$FILE"
+        let count=count+1
+    fi
+done
+
+
+for (( i=0; i<$count; i++ ))
+do
+    for (( k=i+1; k<$count; k++ ))
+    do
+	cmp -s "${regfiles[$i]}" "${regfiles[$k]}"
+	if [ $? -eq 0 ]
+	then
+	   # rm "$regfiles[$k]"
+	    ln -fP "$regfiles[$i]" "$regfiles[$k]"
+	    regfiles[$k]=regfiles[$i]
+	fi
+    done
+done
+
+

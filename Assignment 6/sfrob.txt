@@ -1,0 +1,26 @@
+I used the following three commands to compare:
+time ./sfrobu < output2.txt > result1.txt
+time ./sfrob < output2.txt > result2.txt
+time ./sfrobs < output2.txt > result3.txt
+
+Here is the result I got from the above commands:
+Comparisons: 4999999
+real    0m6.343s
+user    0m0.275s
+sys 0m5.847s
+
+real    0m4.746s
+user    0m0.253s
+sys 0m4.425s
+
+real	0m0.026s
+user	0m0.009s
+sys	0m0.007s
+
+I used the same file I uscreated earlier, which is 
+of the size of 5MB. Here, we can see that the shell
+script performs the best, following by the buffered
+version then unbuffered version. This makes sense
+since the unbuffered version needs to keep asking
+for permission for system call.
+
